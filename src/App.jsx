@@ -299,7 +299,6 @@ export default function App() {
   const [newPromptTier, setNewPromptTier] = useState('Tại bàn');
   const [goalDraft, setGoalDraft] = useState('100');
 
-  const cameraInputRef = useRef(null);
   const galleryInputRef = useRef(null);
 
   // ==========================================
@@ -661,18 +660,7 @@ export default function App() {
   // ==========================================
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#2A1F1D] pb-24">
-      {/* Hidden native inputs */}
-      <input
-        ref={cameraInputRef}
-        type="file"
-        accept="image/*,video/*"
-        capture="environment"
-        className="hidden"
-        onChange={(e) => {
-          handleFilesSelected(e.target.files, pendingChallengeId);
-          e.target.value = '';
-        }}
-      />
+      {/* Hidden native input */}
       <input
         ref={galleryInputRef}
         type="file"
@@ -764,29 +752,17 @@ export default function App() {
                 Ảnh mọi người gửi sẽ hiện lên album chung và màn hình lớn trong tiệc, để tất cả cùng xem vui và tải ảnh đẹp về máy.
               </p>
 
-              {/* Primary Actions */}
-              <div className="grid grid-cols-2 gap-2.5">
-                <button
-                  onClick={() => {
-                    setPendingChallengeId(null);
-                    cameraInputRef.current?.click();
-                  }}
-                  className="py-3.5 px-4 rounded-2xl bg-[#6E1B1E] hover:bg-[#5A1518] active:scale-[0.99] text-[#FDFBF7] font-medium text-sm flex items-center justify-center gap-2 shadow-sm transition"
-                >
-                  <Camera className="w-4 h-4" />
-                  <span>Chụp ngay</span>
-                </button>
-                <button
-                  onClick={() => {
-                    setPendingChallengeId(null);
-                    galleryInputRef.current?.click();
-                  }}
-                  className="py-3.5 px-4 rounded-2xl bg-[#F6EAEB] hover:bg-[#EEDADB] active:scale-[0.99] text-[#6E1B1E] font-medium text-sm flex items-center justify-center gap-2 border border-[#E5C9CB] transition"
-                >
-                  <ImageIcon className="w-4 h-4" />
-                  <span>Chọn từ máy</span>
-                </button>
-              </div>
+              {/* Single Clean Primary Action */}
+              <button
+                onClick={() => {
+                  setPendingChallengeId(null);
+                  galleryInputRef.current?.click();
+                }}
+                className="w-full py-3.5 px-5 rounded-2xl bg-[#6E1B1E] hover:bg-[#5A1518] active:scale-[0.99] text-[#FDFBF7] font-medium text-sm flex items-center justify-center gap-2 shadow-sm transition"
+              >
+                <Camera className="w-4 h-4" />
+                <span>Chụp & Gửi ảnh / Video</span>
+              </button>
               <p className="text-[11px] text-[#8E7F7A] mt-3">
                 Chọn nhiều ảnh cùng lúc đều được · Không cần đăng nhập
               </p>
